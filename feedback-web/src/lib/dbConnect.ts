@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 // return connection object from mongoose after connection
 type ConnectionObject = {
-    isConnected?: Number;
+    isConnected?: number;
 }
 // initialy empty object in connection
 const connection: ConnectionObject ={}

@@ -1,12 +1,13 @@
 import mongoose from "mongoose";
 
+// return connection object from mongoose after connection
 type ConnectionObject = {
     isConnected?: Number;
 }
-
+// initialy empty object in connection
 const connection: ConnectionObject ={}
 
-// promise void means that fn will return a any type of promise
+// promise void means that fn will return any type of promise data i don't care what type of return
 async function dbConnect(): Promise<void>{
     if(connection.isConnected){
         console.log("Already connected to the database");

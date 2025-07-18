@@ -1,11 +1,11 @@
 import mongoose,{Schema,Document} from "mongoose";
 
-// typesript interface for message
+// typescript interface for message
 export interface Message extends Document {
     content: string;
     createdAt: Date;
 }
-// create messageSchema of message schema type
+// create messageSchema of message schema type for type safety
 const MessageSchema: Schema<Message> = new Schema({
     content:{
         type: String,
@@ -28,7 +28,7 @@ export interface User extends Document {
     isVerified: boolean;
     verifyCodeExpiry: Date
     isAcceptingMessage : boolean;
-    message: Message[];
+    messages: Message[];
 }
 
 export const userSchema: Schema<User> = new Schema({
@@ -40,15 +40,16 @@ export const userSchema: Schema<User> = new Schema({
     },
     password: {
         type: String,
-        required: [true,"password is required"],
+        required: [true,"Password is required"],
         minlength: [6,"password must be at least 6 characters"],
         trim: true,
     },
     email: {
         type: String,
-        required:[true,"email is required"],
+        required:[true,"Email is required"],
         unique: true,
         trim: true,
+        // regexr for validation
         match: [/^\S+@\S+\.\S+$/, "Please enter a valid email address"],
     },
     verifyCode: {
@@ -67,11 +68,11 @@ export const userSchema: Schema<User> = new Schema({
         type: Boolean,
         default: true
     },
-    message: [MessageSchema]
+    messages: [MessageSchema]
 
 })
 
-
+// create user type model by mogoose through typescript
 export const UserModel = (mongoose.models.User as mongoose.Model<User>) || mongoose.model<User>("User", userSchema);
 
 export default UserModel;

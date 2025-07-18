@@ -1,7 +1,7 @@
 import {z} from 'zod';
 import { email } from 'zod/v4';
 
-// This schema validates the username for a sign-up form
+// This schema validates the username for a sign-up form by zod library
 export const usernameValidation = 
     z.string()
     .min(3,"Username must be at least 3 characters long")
